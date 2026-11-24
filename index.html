@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- htmlaunch:enhanced:v2 -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22hsl(351%2C72%25%2C58%25)%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22hsl(21%2C72%25%2C44%25)%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22url(%23g)%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2246%22%20text-anchor%3D%22middle%22%20font-family%3D%22ui-sans-serif%2Csystem-ui%2C-apple-system%2CSegoe%20UI%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%3EP%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta name="theme-color" content="#5e147b">
+<meta name="description" content="Phrasal Verb Quest — Class 10 Interactive Game | deployed with HTMLaunch">
+<link rel="canonical" href="https://Macthesmalwa.github.io/phrasegame/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Phrasal Verb Quest — Class 10 Interactive Game">
+<meta property="og:title" content="Phrasal Verb Quest — Class 10 Interactive Game">
+<meta property="og:description" content="Phrasal Verb Quest — Class 10 Interactive Game | deployed with HTMLaunch">
+<meta property="og:url" content="https://Macthesmalwa.github.io/phrasegame/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s.wordpress.com/mshots/v1/https%3A%2F%2FMacthesmalwa.github.io%2Fphrasegame%2F?w=1200&h=630">
+<meta property="og:image:alt" content="Phrasal Verb Quest — Class 10 Interactive Game">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Phrasal Verb Quest — Class 10 Interactive Game">
+<meta name="twitter:description" content="Phrasal Verb Quest — Class 10 Interactive Game | deployed with HTMLaunch">
+<meta name="twitter:image" content="https://s.wordpress.com/mshots/v1/https%3A%2F%2FMacthesmalwa.github.io%2Fphrasegame%2F?w=1200&h=630">
+<meta name="twitter:image:alt" content="Phrasal Verb Quest — Class 10 Interactive Game">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phrasal Verb Quest — Class 10 Interactive Game</title>
+  <style>
+    :root {
+      --bg-grad-1: #6366f1;
+      --bg-grad-2: #ec4899;
+      --bg-grad-3: #f59e0b;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --text-dark: #1e1b4b;
+      --text-muted: #4b5563;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --success: #10b981;
+      --success-bg: #d1fae5;
+      --danger: #ef4444;
+      --danger-bg: #fee2e2;
+      --accent: #f59e0b;
+      --shadow: 0 20px 45px rgba(30, 27, 75, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3));
+      background-size: 300% 300%;
+      animation: gradientBG 14s ease infinite;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 14px 40px;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Floating Compliment Toast */
+    .compliment-banner {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-130%);
+      background: linear-gradient(90deg, #10b981, #059669);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      box-shadow: 0 12px 30px rgba(5, 150, 105, 0.45);
+      z-index: 1000;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      max-width: 92vw;
+    }
+
+    .compliment-banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 820px;
+      background: var(--card-bg);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      backdrop-filter: blur(10px);
+      border: 3px solid rgba(255, 255, 255, 0.65);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .badge-top {
+      display: inline-block;
+      background: linear-gradient(90deg, #fef3c7, #fde68a);
+      color: #92400e;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #4f46e5, #db2777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Navigation Tabs */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .tab-btn {
+      padding: 12px 10px;
+      border: none;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #eef2ff;
+      color: #4338ca;
+      transition: all 0.25s ease;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-2px);
+      background: #e0e7ff;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
+    }
+
+    /* Direction Filter Bar */
+    .direction-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      padding: 10px 14px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .direction-bar span {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .dir-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 2px solid #cbd5e1;
+      background: #fff;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-dark);
+      transition: all 0.2s;
+    }
+
+    .dir-pill.active {
+      border-color: #ec4899;
+      background: #fdf2f8;
+      color: #be185d;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .stat-box {
+      background: linear-gradient(180deg, #ffffff, #f1f5f9);
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    /* Progress Bar */
+    .progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #10b981, #3b82f6, #ec4899);
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    /* Question Card */
+    .question-card {
+      background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+      border: 2px solid #c7d2fe;
+      border-radius: 22px;
+      padding: 24px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .q-tag {
+      display: inline-block;
+      background: #4f46e5;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .q-prompt {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: #1e1b4b;
+      line-height: 1.35;
+    }
+
+    /* Options Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      background: #ffffff;
+      border: 2.5px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      border-color: #6366f1;
+      background: #eef2ff;
+    }
+
+    .option-letter {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #e0e7ff;
+      color: #4338ca;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .option-btn.correct {
+      background: var(--success-bg);
+      border-color: var(--success);
+      color: #065f46;
+      animation: popScale 0.35s ease;
+    }
+
+    .option-btn.correct .option-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .option-btn.wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger);
+      color: #991b1b;
+      animation: shake 0.35s ease;
+    }
+
+    .option-btn.wrong .option-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    @keyframes popScale {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* Feedback Panel */
+    .feedback-box {
+      min-height: 62px;
+      border-radius: 16px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .feedback-box.neutral {
+      background: #f1f5f9;
+      color: var(--text-muted);
+    }
+
+    .feedback-box.win {
+      background: linear-gradient(90deg, #d1fae5, #a7f3d0);
+      color: #065f46;
+      border: 2px solid #10b981;
+    }
+
+    .feedback-box.lose {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 2px solid #ef4444;
+    }
+
+    .next-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 6px 15px rgba(236, 72, 153, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Result Screen */
+    .result-screen {
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .trophy {
+      font-size: 4.5rem;
+      margin-bottom: 10px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .result-screen h2 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #4f46e5;
+      margin-bottom: 8px;
+    }
+
+    .result-compliment {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #059669;
+      background: #d1fae5;
+      padding: 12px 20px;
+      border-radius: 16px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    /* Flashcard Mode */
+    .flashcard-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 2px solid #cbd5e1;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: #6366f1;
+    }
+
+    .flashcard-stage {
+      perspective: 1000px;
+      height: 240px;
+      margin-bottom: 18px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-stage.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.16);
+    }
+
+    .flashcard-front {
+      background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+      color: #fff;
+    }
+
+    .flashcard-back {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      transform: rotateY(180deg);
+    }
+
+    .fc-hint {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-top: 14px;
+      font-weight: 600;
+    }
+
+    .fc-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      header h1 {
+        font-size: 1.55rem;
+      }
+      .q-prompt {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div id="compliment-banner" class="compliment-banner">
+    <span id="compliment-emoji">🌟</span>
+    <span id="compliment-text">Brilliant work, Class 10 Champ!</span>
+  </div>
+
+  <div class="app-container">
+    <header>
+      <div class="badge-top">Class 10 English • Chapter 1 Phrasal Verbs</div>
+      <h1>Phrasal Verb Quest 🚀</h1>
+      <p>Master every phrasal verb from your textbook with instant streaks & celebrations!</p>
+    </header>
+
+    <!-- Game Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="tab-btn active" data-mode="quiz" onclick="switchMode('quiz')">🎯 Quick Quiz (10)</button>
+      <button class="tab-btn" data-mode="blitz" onclick="switchMode('blitz')">⚡ 60s Speed Blitz</button>
+      <button class="tab-btn" data-mode="flashcards" onclick="switchMode('flashcards')">🃏 Study Flashcards</button>
+    </div>
+
+    <!-- Question Direction Switcher -->
+    <div class="direction-bar" id="direction-bar">
+      <span>Question Style:</span>
+      <button class="dir-pill active" data-dir="v2m" onclick="setDirection('v2m')">Verb ➔ Meaning</button>
+      <button class="dir-pill" data-dir="m2v" onclick="setDirection('m2v')">Meaning ➔ Verb</button>
+      <button class="dir-pill" data-dir="mixed" onclick="setDirection('mixed')">🎲 Mixed</button>
+    </div>
+
+    <!-- Quiz / Blitz Area -->
+    <div id="play-area">
+      <div class="stats-bar">
+        <div class="stat-box">
+          <div class="stat-label">Score</div>
+          <div class="stat-value" id="stat-score">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Streak 🔥</div>
+          <div class="stat-value" id="stat-streak">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label" id="stat-progress-label">Question</div>
+          <div class="stat-value" id="stat-progress">1 / 10</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label" id="stat-extra-label">Best Streak</div>
+          <div class="stat-value" id="stat-extra">0</div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="question-card">
+        <div class="q-tag" id="q-tag">What is the meaning of this phrasal verb?</div>
+        <div class="q-prompt" id="q-prompt">Loading...</div>
+      </div>
+
+      <div class="options-grid" id="options-grid"></div>
+
+      <div class="feedback-box neutral" id="feedback-box">
+        <span id="feedback-text">Pick the right option above to earn a compliment! ✨</span>
+        <button class="next-btn hidden" id="next-btn" onclick="nextQuestion()">Next ➔</button>
+      </div>
+    </div>
+
+    <!-- Result Area -->
+    <div id="result-area" class="result-screen hidden">
+      <div class="trophy" id="result-trophy">🏆</div>
+      <h2 id="result-title">Outstanding Performance!</h2>
+      <div class="result-compliment" id="result-compliment">You nailed it like a true topper!</div>
+      <div class="stats-bar" style="max-width: 520px; margin: 0 auto 24px;">
+        <div class="stat-box">
+          <div class="stat-label">Final Score</div>
+          <div class="stat-value" id="final-score">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Accuracy</div>
+          <div class="stat-value" id="final-accuracy">0%</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Max Streak</div>
+          <div class="stat-value" id="final-streak">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Rank</div>
+          <div class="stat-value" id="final-rank">A+</div>
+        </div>
+      </div>
+      <button class="next-btn" style="font-size: 1.1rem; padding: 14px 32px;" onclick="restartGame()">Play Again 🔄</button>
+    </div>
+
+    <!-- Flashcards Area -->
+    <div id="flashcards-area" class="hidden">
+      <div class="flashcard-controls">
+        <input type="text" id="fc-search" class="search-input" placeholder="🔍 Search any phrasal verb or meaning (e.g., look, give, cancel)..." oninput="filterFlashcards()" />
+      </div>
+
+      <div class="flashcard-stage" id="flashcard-stage" onclick="flipCard()">
+        <div class="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; opacity:0.85; margin-bottom:8px;">Phrasal Verb</div>
+            <div id="fc-verb" style="font-size:2rem; font-weight:900;">ask out</div>
+            <div class="fc-hint">👆 Click card to reveal meaning</div>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; opacity:0.85; margin-bottom:8px;">Meaning</div>
+            <div id="fc-meaning" style="font-size:1.5rem; font-weight:800; line-height:1.4;">invite on a date</div>
+            <div class="fc-hint">👆 Click card to flip back</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-nav">
+        <button class="dir-pill" onclick="prevCard()">⬅ Previous</button>
+        <span id="fc-counter" style="font-weight:800; color:#4338ca;">1 / 72</span>
+        <button class="dir-pill" onclick="nextCard()">Next ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Complete Phrasal Verbs Dataset extracted from Class 10 Textbook Pages 11, 12, and 13
+    const PHRASAL_VERBS = [
+      // Page 11
+      { verb: "ask out", meaning: "invite on a date" },
+      { verb: "ask around", meaning: "ask many people the same question" },
+      { verb: "add up to", meaning: "equal" },
+      { verb: "back up", meaning: "reverse; support" },
+      { verb: "blow up", meaning: "explode; add air" },
+      { verb: "break down", meaning: "stop functioning (vehicle, machine); get upset; divide into smaller parts" },
+      { verb: "break in", meaning: "force entry to a building; interrupt" },
+      { verb: "break into", meaning: "enter forcibly" },
+      { verb: "break up", meaning: "end a relationship; start laughing" },
+      { verb: "break out", meaning: "escape; develop a skin condition" },
+      { verb: "bring down", meaning: "make unhappy; raise a child" },
+      { verb: "bring up", meaning: "start talking about a subject; vomit" },
+      { verb: "call around", meaning: "phone many different places or people" },
+      { verb: "call someone back", meaning: "return a phone call" },
+      { verb: "call something off", meaning: "cancel" },
+      { verb: "call on", meaning: "ask for an answer or opinion; visit someone" },
+      { verb: "catch up", meaning: "get to the same point as someone else" },
+      { verb: "check in", meaning: "arrive and register at a hotel or airport" },
+      { verb: "check out", meaning: "leave a hotel; look at carefully; investigate" },
+      { verb: "cheer up", meaning: "become happier or make happier" },
+      { verb: "clean something up", meaning: "tidy, clean" },
+      { verb: "come across something", meaning: "find unexpectedly" },
+      { verb: "come apart", meaning: "separate" },
+      { verb: "come down with something", meaning: "become sick" },
+      { verb: "come forward", meaning: "volunteer for a task or to give evidence" },
+      { verb: "come from somewhere", meaning: "originate in" },
+      { verb: "count on someone / something", meaning: "rely on" },
+      { verb: "cross something out", meaning: "draw a line through" },
+      { verb: "cut back on something", meaning: "consume less" },
+      { verb: "cut something down", meaning: "make something fall to the ground" },
+      { verb: "cut in", meaning: "interrupt; pull in too closely in front of another vehicle" },
+      { verb: "cut off", meaning: "remove with something sharp; stop providing" },
+      { verb: "cut out", meaning: "remove part of something (usually with scissors and paper)" },
+      { verb: "do over", meaning: "beat up; ransack" },
+      { verb: "do away with something", meaning: "discard" },
+      { verb: "dress up", meaning: "wear nice clothing" },
+      { verb: "drop back", meaning: "move back in a position or group" },
+      { verb: "drop in / by / over", meaning: "come without an appointment" },
+      { verb: "drop someone / something off", meaning: "take someone/something somewhere and leave them/it there" },
+      { verb: "drop out", meaning: "quit a class, school, etc." },
+      { verb: "eat out", meaning: "eat at a restaurant" },
+      { verb: "end up", meaning: "eventually reach, do, or decide" },
+      { verb: "fall apart", meaning: "break into pieces" },
+      { verb: "fall down", meaning: "fall to the ground" },
+      { verb: "fall out", meaning: "separate from an interior; become loose and unattached" },
+      { verb: "fill something in / out", meaning: "write information in blanks" },
+      { verb: "fill something up", meaning: "fill to the top" },
+      { verb: "find out", meaning: "discover" },
+      { verb: "get something across / over", meaning: "communicate, make understandable" },
+
+      // Page 12
+      { verb: "get along / on", meaning: "like each other" },
+      { verb: "get around", meaning: "have mobility" },
+      { verb: "get away", meaning: "go on a vacation" },
+      { verb: "get away with something", meaning: "do without being noticed or punished" },
+      { verb: "get back", meaning: "return; receive something you had before" },
+      { verb: "get back at someone", meaning: "retaliate, take revenge" },
+      { verb: "get back into something", meaning: "become interested in something again" },
+      { verb: "get on something", meaning: "step onto a vehicle" },
+      { verb: "get over", meaning: "recover from an illness, loss, or difficulty; overcome a problem" },
+      { verb: "get together", meaning: "meet (usually for social reasons)" },
+      { verb: "get up", meaning: "get out of bed; stand" },
+      { verb: "give away", meaning: "reveal hidden information about someone; take the bride to the altar" },
+      { verb: "give something away", meaning: "ruin a secret; give something to someone for free" },
+      { verb: "give something back", meaning: "return a borrowed item" },
+      { verb: "give in", meaning: "reluctantly stop fighting or arguing" },
+      { verb: "give something out", meaning: "give to many people (usually at no cost)" },
+      { verb: "give up", meaning: "quit a habit; stop trying" },
+      { verb: "go after someone", meaning: "follow someone; try to achieve something" },
+      { verb: "go against someone", meaning: "compete, oppose" },
+      { verb: "go ahead", meaning: "start, proceed" },
+      { verb: "go back", meaning: "return to a place" },
+      { verb: "go out", meaning: "leave home to go on a social event" },
+      { verb: "go over", meaning: "review; visit someone nearby" },
+      { verb: "grow apart", meaning: "stop being friends over time" },
+      { verb: "grow up", meaning: "become an adult" },
+      { verb: "hand something in", meaning: "submit" },
+      { verb: "hand something out", meaning: "distribute to a group of people" },
+      { verb: "hang in", meaning: "stay positive" },
+      { verb: "hang on", meaning: "wait a short time" },
+      { verb: "hang out", meaning: "spend time relaxing" },
+      { verb: "hang up", meaning: "end a phone call" },
+      { verb: "hold someone / something up", meaning: "rob" },
+      { verb: "keep on doing something", meaning: "continue doing" },
+      { verb: "keep something from someone", meaning: "not tell" },
+      { verb: "keep someone / something out", meaning: "stop from entering" },
+      { verb: "let someone down", meaning: "fail to support or help; disappoint" },
+      { verb: "look after someone / something", meaning: "take care of" },
+      { verb: "look down on someone", meaning: "think less of, consider inferior" },
+      { verb: "look for someone / something", meaning: "try to find" },
+      { verb: "look forward to something", meaning: "be excited about the future" },
+
+      // Page 13
+      { verb: "look into something", meaning: "investigate" },
+      { verb: "look out", meaning: "be careful, vigilant, and take notice" },
+      { verb: "look something over", meaning: "check, examine" },
+      { verb: "look something up", meaning: "search and find information in a reference book or database" },
+      { verb: "look up to someone", meaning: "have a lot of respect for" },
+      { verb: "make up", meaning: "invent, lie about something; forgive each other; apply cosmetics" },
+      { verb: "mix something up", meaning: "confuse two or more things" },
+      { verb: "pass away", meaning: "die" },
+      { verb: "pass out", meaning: "faint; give the same thing to many people" },
+      { verb: "pass something up", meaning: "decline (usually something good)" },
+      { verb: "pay someone back", meaning: "return owed money" },
+      { verb: "pay for something", meaning: "be punished for doing something bad" },
+      { verb: "pick something out", meaning: "choose" },
+      { verb: "point out", meaning: "indicate with your finger" },
+      { verb: "put down", meaning: "put what you are holding on a surface; insult, make someone feel stupid" },
+      { verb: "put something off", meaning: "postpone" },
+      { verb: "put something out", meaning: "extinguish" },
+      { verb: "put something together", meaning: "assemble" },
+      { verb: "put up with someone / something", meaning: "bear, tolerate" },
+      { verb: "put something on", meaning: "put clothing or accessories on your body" },
+      { verb: "run into someone / something", meaning: "meet unexpectedly" },
+      { verb: "run over", meaning: "drive a vehicle over a person or thing; rehearse, review" },
+      { verb: "run away", meaning: "leave unexpectedly, escape" },
+      { verb: "run out", meaning: "have none left" },
+      { verb: "send something back", meaning: "return (usually by mail)" },
+      { verb: "set up", meaning: "arrange, organize; trick, trap" },
+      { verb: "shop around", meaning: "compare prices" },
+      { verb: "show off", meaning: "act extra special for people watching (usually boastfully)" },
+      { verb: "sleep over", meaning: "stay somewhere for the night" },
+      { verb: "sort something out", meaning: "organize, resolve a problem" },
+      { verb: "stick to something", meaning: "continue doing something; limit yourself to one particular thing" },
+      { verb: "switch something off", meaning: "stop the energy flow, turn off" },
+      { verb: "switch something on", meaning: "start the energy flow, turn on" },
+      { verb: "take after someone", meaning: "resemble a family member" },
+      { verb: "take something apart", meaning: "purposely break into pieces" },
+      { verb: "take something back", meaning: "return an item" },
+      { verb: "take off", meaning: "start to fly; remove something (usually clothing)" },
+      { verb: "take out", meaning: "remove from a place or thing; pay for someone to go somewhere with you" },
+      { verb: "tear something up", meaning: "rip into pieces" },
+      { verb: "think back", meaning: "remember (often + to, sometimes + on)" },
+      { verb: "think something over", meaning: "consider" },
+      { verb: "throw something away", meaning: "dispose of" },
+      { verb: "turn down", meaning: "decrease the volume or strength; refuse" },
+      { verb: "turn something off", meaning: "stop the energy flow, switch off" },
+      { verb: "turn something on", meaning: "start the energy, switch on" },
+      { verb: "turn something up", meaning: "increase the volume or strength; appear suddenly" },
+      { verb: "try something on", meaning: "sample clothing" },
+      { verb: "try something out", meaning: "test" },
+      { verb: "use something up", meaning: "finish the supply" },
+      { verb: "wake up", meaning: "stop sleeping" },
+      { verb: "warm up", meaning: "increase the temperature; prepare body for exercise" },
+      { verb: "wear off", meaning: "fade away" },
+      { verb: "work out", meaning: "exercise; be successful; make a calculation" }
+    ];
+
+    // Enthusiastic Compliments for Class 10 Students
+    const COMPLIMENTS = [
+      { emoji: "🌟", text: "Brilliant! You're crushing Class 10 English!" },
+      { emoji: "🔥", text: "Spot on! Topper vibes all the way!" },
+      { emoji: "🚀", text: "Superb! Your vocabulary is skyrocketing!" },
+      { emoji: "💎", text: "Flawless answer! Sharp as a diamond!" },
+      { emoji: "🏆", text: "Champion move! Board exams won't stand a chance!" },
+      { emoji: "⚡", text: "Lightning fast & 100% accurate! Amazing!" },
+      { emoji: "🎯", text: "Bullseye! You nailed that phrasal verb!" },
+      { emoji: "👑", text: "Absolute legend! Keep that winning streak alive!" },
+      { emoji: "🌈", text: "Fantastic job! Your hard work really shows!" },
+      { emoji: "🧠", text: "Genius alert! What an impressive memory!" }
+    ];
+
+    // Game State
+    let currentMode = "quiz"; // 'quiz' | 'blitz' | 'flashcards'
+    let questionDirection = "v2m"; // 'v2m' | 'm2v' | 'mixed'
+    let score = 0;
+    let streak = 0;
+    let bestStreak = 0;
+    let questionIndex = 0;
+    let totalQuestions = 10;
+    let correctCount = 0;
+    let answeredCurrent = false;
+    let currentQuestion = null;
+    let usedIndices = new Set();
+
+    // Blitz Timer
+    let timerInterval = null;
+    let timeLeft = 60;
+
+    // Flashcard State
+    let filteredCards = [...PHRASAL_VERBS];
+    let fcIndex = 0;
+
+    // Web Audio Synthesizer for Cheerful Sound Effects
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playTone(type) {
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      const now = audioCtx.currentTime;
+
+      if (type === "correct") {
+        const notes = [523.25, 659.25, 783.99, 1046.5]; // C5 E5 G5 C6
+        notes.forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(freq, now + i * 0.07);
+          gain.gain.setValueAtTime(0.14, now + i * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.07 + 0.25);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + i * 0.07);
+          osc.stop(now + i * 0.07 + 0.26);
+        });
+      } else {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.linearRampToValueAtTime(160, now + 0.25);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      }
+    }
+
+    // Confetti Burst Animation
+    const canvas = document.getElementById("confetti-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function launchConfetti(count = 55) {
+      const colors = ["#f59e0b", "#10b981", "#3b82f6", "#ec4899", "#8b5cf6", "#ef4444"];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: canvas.width * (0.2 + Math.random() * 0.6),
+          y: canvas.height * 0.45,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 1.1) * 14,
+          size: Math.random() * 8 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 12,
+          alpha: 1
+        });
+      }
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.38; // gravity
+        p.rotation += p.vRot;
+        p.alpha -= 0.015;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        ctx.restore();
+
+        if (p.alpha <= 0) particles.splice(idx, 1);
+      });
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+
+    // Compliment Toast Trigger
+    let complimentTimeout = null;
+    function showCompliment() {
+      const pick = COMPLIMENTS[Math.floor(Math.random() * COMPLIMENTS.length)];
+      const banner = document.getElementById("compliment-banner");
+      document.getElementById("compliment-emoji").textContent = pick.emoji;
+      const streakNote = streak >= 3 ? ` (${streak}x Streak!)` : "";
+      document.getElementById("compliment-text").textContent = pick.text + streakNote;
+
+      banner.classList.add("show");
+      clearTimeout(complimentTimeout);
+      complimentTimeout = setTimeout(() => {
+        banner.classList.remove("show");
+      }, 2300);
+
+      return `${pick.emoji} ${pick.text}`;
+    }
+
+    // Mode Switching
+    function switchMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === mode);
+      });
+
+      clearInterval(timerInterval);
+
+      const playArea = document.getElementById("play-area");
+      const resultArea = document.getElementById("result-area");
+      const fcArea = document.getElementById("flashcards-area");
+      const dirBar = document.getElementById("direction-bar");
+
+      resultArea.classList.add("hidden");
+
+      if (mode === "flashcards") {
+        playArea.classList.add("hidden");
+        dirBar.classList.add("hidden");
+        fcArea.classList.remove("hidden");
+        renderFlashcard();
+      } else {
+        fcArea.classList.add("hidden");
+        dirBar.classList.remove("hidden");
+        playArea.classList.remove("hidden");
+        restartGame();
+      }
+    }
+
+    function setDirection(dir) {
+      questionDirection = dir;
+      document.querySelectorAll(".dir-pill").forEach(p => {
+        p.classList.toggle("active", p.dataset.dir === dir);
+      });
+      if (currentMode !== "flashcards") restartGame();
+    }
+
+    function restartGame() {
+      clearInterval(timerInterval);
+      score = 0;
+      streak = 0;
+      bestStreak = 0;
+      questionIndex = 0;
+      correctCount = 0;
+      usedIndices.clear();
+
+      document.getElementById("result-area").classList.add("hidden");
+      document.getElementById("play-area").classList.remove("hidden");
+
+      if (currentMode === "blitz") {
+        timeLeft = 60;
+        document.getElementById("stat-progress-label").textContent = "Answered";
+        document.getElementById("stat-extra-label").textContent = "Time Left ⏱️";
+        document.getElementById("stat-extra").textContent = "60s";
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          document.getElementById("stat-extra").textContent = `${timeLeft}s`;
+          document.getElementById("progress-fill").style.width = `${((60 - timeLeft) / 60) * 100}%`;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+          }
+        }, 1000);
+      } else {
+        document.getElementById("stat-progress-label").textContent = "Question";
+        document.getElementById("stat-extra-label").textContent = "Best Streak";
+        document.getElementById("stat-extra").textContent = "0";
+      }
+
+      updateStats();
+      loadQuestion();
+    }
+
+    function updateStats() {
+      document.getElementById("stat-score").textContent = score;
+      document.getElementById("stat-streak").textContent = streak;
+
+      if (currentMode === "quiz") {
+        document.getElementById("stat-progress").textContent = `${Math.min(questionIndex + 1, totalQuestions)} / ${totalQuestions}`;
+        document.getElementById("stat-extra").textContent = bestStreak;
+        document.getElementById("progress-fill").style.width = `${(questionIndex / totalQuestions) * 100}%`;
+      } else {
+        document.getElementById("stat-progress").textContent = questionIndex;
+      }
+    }
+
+    function loadQuestion() {
+      answeredCurrent = false;
+      document.getElementById("next-btn").classList.add("hidden");
+      const fb = document.getElementById("feedback-box");
+      fb.className = "feedback-box neutral";
+      document.getElementById("feedback-text").textContent = "Pick the right option above to earn a compliment! ✨";
+
+      if (usedIndices.size >= PHRASAL_VERBS.length) usedIndices.clear();
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * PHRASAL_VERBS.length);
+      } while (usedIndices.has(idx));
+      usedIndices.add(idx);
+
+      const target = PHRASAL_VERBS[idx];
+      let dir = questionDirection;
+      if (dir === "mixed") dir = Math.random() < 0.5 ? "v2m" : "m2v";
+
+      // Build 3 unique distractors
+      const distractors = [];
+      const usedDistractorIdx = new Set([idx]);
+      while (distractors.length < 3) {
+        const dIdx = Math.floor(Math.random() * PHRASAL_VERBS.length);
+        if (!usedDistractorIdx.has(dIdx)) {
+          usedDistractorIdx.add(dIdx);
+          distractors.push(PHRASAL_VERBS[dIdx]);
+        }
+      }
+
+      const choices = [target, ...distractors].sort(() => Math.random() - 0.5);
+      currentQuestion = { target, dir, choices };
+
+      const qTag = document.getElementById("q-tag");
+      const qPrompt = document.getElementById("q-prompt");
+
+      if (dir === "v2m") {
+        qTag.textContent = "Verb ➔ Meaning • Choose the right definition";
+        qPrompt.textContent = `"${target.verb}"`;
+      } else {
+        qTag.textContent = "Meaning ➔ Verb • Which phrasal verb means:";
+        qPrompt.textContent = `"${target.meaning}"`;
+      }
+
+      const grid = document.getElementById("options-grid");
+      grid.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      choices.forEach((item, i) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        const label = dir === "v2m" ? item.meaning : item.verb;
+        btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${label}</span>`;
+        btn.onclick = () => handleAnswer(btn, item === target);
+        grid.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selectedBtn, isCorrect) {
+      if (answeredCurrent) return;
+      answeredCurrent = true;
+      questionIndex++;
+
+      const allBtns = document.querySelectorAll(".option-btn");
+      allBtns.forEach((btn, i) => {
+        btn.disabled = true;
+        if (currentQuestion.choices[i] === currentQuestion.target) {
+          btn.classList.add("correct");
+        }
+      });
+
+      const fb = document.getElementById("feedback-box");
+      const fbText = document.getElementById("feedback-text");
+
+      if (isCorrect) {
+        correctCount++;
+        streak++;
+        if (streak > bestStreak) bestStreak = streak;
+        const bonus = streak >= 3 ? 5 : 0;
+        score += 10 + bonus;
+
+        playTone("correct");
+        launchConfetti(streak >= 3 ? 75 : 40);
+        const complimentMsg = showCompliment();
+
+        fb.className = "feedback-box win";
+        fbText.textContent = `${complimentMsg} (+${10 + bonus} pts)`;
+      } else {
+        streak = 0;
+        selectedBtn.classList.add("wrong");
+        playTone("wrong");
+
+        fb.className = "feedback-box lose";
+        fbText.textContent = `Not quite! "${currentQuestion.target.verb}" means "${currentQuestion.target.meaning}". Keep going! 💪`;
+      }
+
+      updateStats();
+
+      if (currentMode === "blitz") {
+        setTimeout(() => {
+          if (timeLeft > 0) loadQuestion();
+        }, isCorrect ? 650 : 1250);
+      } else {
+        const nextBtn = document.getElementById("next-btn");
+        nextBtn.textContent = questionIndex >= totalQuestions ? "See Results 🏆" : "Next ➔";
+        nextBtn.classList.remove("hidden");
+      }
+    }
+
+    function nextQuestion() {
+      if (currentMode === "quiz" && questionIndex >= totalQuestions) {
+        endGame();
+      } else {
+        loadQuestion();
+      }
+    }
+
+    function endGame() {
+      clearInterval(timerInterval);
+      document.getElementById("play-area").classList.add("hidden");
+      document.getElementById("result-area").classList.remove("hidden");
+      document.getElementById("progress-fill").style.width = "100%";
+
+      const attempted = Math.max(questionIndex, 1);
+      const accuracy = Math.round((correctCount / attempted) * 100);
+
+      document.getElementById("final-score").textContent = score;
+      document.getElementById("final-accuracy").textContent = `${accuracy}%`;
+      document.getElementById("final-streak").textContent = bestStreak;
+
+      let rank = "B";
+      let title = "Great Effort!";
+      let compliment = "Solid practice! Play one more round to hit 100% mastery!";
+      let trophy = "🎖️";
+
+      if (accuracy >= 90) {
+        rank = "S+";
+        title = "Unstoppable English Master!";
+        compliment = "Extraordinary work! You're 100% ready to ace your Class 10 exams!";
+        trophy = "👑";
+        launchConfetti(110);
+      } else if (accuracy >= 75) {
+        rank = "A+";
+        title = "Brilliant Performance!";
+        compliment = "Impressive command over phrasal verbs! Keep shining, superstar!";
+        trophy = "🏆";
+        launchConfetti(70);
+      } else if (accuracy >= 50) {
+        rank = "A";
+        title = "Well Done, Rising Star!";
+        compliment = "You're getting stronger with every question! Try Study Flashcards to boost even higher!";
+        trophy = "🌟";
+      }
+
+      document.getElementById("final-rank").textContent = rank;
+      document.getElementById("result-title").textContent = title;
+      document.getElementById("result-compliment").textContent = compliment;
+      document.getElementById("result-trophy").textContent = trophy;
+    }
+
+    // Flashcards Logic
+    function filterFlashcards() {
+      const q = document.getElementById("fc-search").value.trim().toLowerCase();
+      filteredCards = PHRASAL_VERBS.filter(
+        item => item.verb.toLowerCase().includes(q) || item.meaning.toLowerCase().includes(q)
+      );
+      fcIndex = 0;
+      renderFlashcard();
+    }
+
+    function renderFlashcard() {
+      const stage = document.getElementById("flashcard-stage");
+      stage.classList.remove("flipped");
+
+      if (filteredCards.length === 0) {
+        document.getElementById("fc-verb").textContent = "No matches found";
+        document.getElementById("fc-meaning").textContent = "Try searching another word";
+        document.getElementById("fc-counter").textContent = "0 / 0";
+        return;
+      }
+
+      const card = filteredCards[fcIndex];
+      document.getElementById("fc-verb").textContent = card.verb;
+      document.getElementById("fc-meaning").textContent = card.meaning;
+      document.getElementById("fc-counter").textContent = `${fcIndex + 1} / ${filteredCards.length}`;
+    }
+
+    function flipCard() {
+      document.getElementById("flashcard-stage").classList.toggle("flipped");
+    }
+
+    function nextCard() {
+      if (filteredCards.length === 0) return;
+      fcIndex = (fcIndex + 1) % filteredCards.length;
+      renderFlashcard();
+    }
+
+    function prevCard() {
+      if (filteredCards.length === 0) return;
+      fcIndex = (fcIndex - 1 + filteredCards.length) % filteredCards.length;
+      renderFlashcard();
+    }
+
+    // Initialize on load
+    restartGame();
+  </script>
+</body>
+</html>
+
+Save this code as an .html file (for example, phrasal_verb_quest.html) and double-click it to open and play in any web browser.
